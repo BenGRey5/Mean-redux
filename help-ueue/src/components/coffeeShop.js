@@ -7,11 +7,10 @@ function Item({ item, onBuy, onRestock, onDelete}) {
             <p>{item.description}</p>
             <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Out of Stock'}</p>
 <button onClick={() => onBuy(item.id)}>Buy</button>
-<button onClick={() => onRestock(item.id, 1)}
-
-
-
+<button onClick={() => onRestock(item.id, 1)}>Restock by 1</button>
+<button onClick={() => onDelete(item.id)}>Delete</button>
         </div>
-
-    )
+    );
 }
+
+export default Item;
