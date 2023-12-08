@@ -20,4 +20,4 @@ function ItemList({ items, onBuy, onRestock, onDelete, onUpdate }) {
 
 export default ItemList;
 
-ddddddffffff
+ddddddfffffffffff
