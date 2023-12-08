@@ -3,8 +3,10 @@ import ItemList from './components/coffeeList.js';
 
 function App() {
   const [items, setItems] = useState([
-    { id: 1, name: 'T-Shirt', description: 'Band T-Shirt', quantity: 50 },
-    { id: 2, name: 'Album', description: 'Music Album', quantity: 30 }
+    { id: 1, name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
+    { id: 2, name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
+    { id: 3, name: 'Liberica Light Roast', description: 'Imported from', quantity: 130 },
+    { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from', quantity: 130 },
   ]);
   const [newItem, setNewItem] = useState({ name: '', description: '', quantity: 0 })
 
@@ -36,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Merchandise Store</h1>
+      <h1>The Mean Bean</h1>
       <ItemList
         items={items}
         onBuy={buyItem}
