@@ -4,10 +4,10 @@ import OptionList from './components/userOptions.js';
 
 function App() {
   const [items, setItems] = useState([
-    { id: 1, name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
-    { id: 2, name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
-    { id: 3, name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
-    { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
+    { id: 1, name: 'Arabica Light Roast', description: 'Imported from Nicaragua $9.99 per pound', quantity: 130 },
+    { id: 2, name: 'Robusta Medium Roast', description: 'Imported from Brazil $10.99 per pound', quantity: 130 },
+    { id: 3, name: 'Liberica Light Roast', description: 'Imported from Philippines $8.99 per pound', quantity: 130 },
+    { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from South America $11.99 per pound', quantity: 130 },
   ]);
 
   const [newItem, setNewItem] = useState({ name: '', description: '', quantity: 0 })
@@ -32,11 +32,6 @@ function App() {
     ));
   };
 
-  const restockItem = (itemId, restockAmount) => {
-    setItems(prevItems => prevItems.map(item =>
-      item.id === itemId ? { ...item, quantity: item.quantity + restockAmount } : item
-    ));
-  };
 
   return (
     <div className="App">
@@ -45,7 +40,6 @@ function App() {
       <ItemList
         items={items}
         onSell={sellItem}
-        onRestock={restockItem}
         onDelete={deleteItem}
         onUpdate={updateItem}
       />
@@ -90,11 +84,6 @@ export default App;
 //     ));
 //   };
 
-//   const restockItem = (itemId, restockAmount) => {
-//     setItems(prevItems => prevItems.map(item =>
-//       item.id === itemId ? { ...item, quantity: item.quantity + restockAmount } : item
-//     ));
-//   };
 
 //   return (
 //     <div className="App">
@@ -103,7 +92,6 @@ export default App;
 //       <ItemList
 //         items={items}
 //         onSell={sellItem}
-//         onRestock={restockItem}
 //         onDelete={deleteItem}
 //         onUpdate={updateItem}
 //       />
