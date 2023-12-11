@@ -32,11 +32,7 @@ function App() {
     ));
   };
 
-  const restockItem = (itemId, restockAmount) => {
-    setItems(prevItems => prevItems.map(item =>
-      item.id === itemId ? { ...item, quantity: item.quantity + restockAmount } : item
-    ));
-  };
+
 
   return (
     <div className="App">

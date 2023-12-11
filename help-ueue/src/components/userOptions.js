@@ -21,7 +21,7 @@ function OptionList({ onAddItem }) {
 
     return (
         <div>
-            <h2>Select Coffee</h2>
+            <h2>Select Coffee for Restock</h2>
             <label>
                 <input
                     type="radio"

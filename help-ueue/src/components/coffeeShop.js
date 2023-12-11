@@ -1,13 +1,12 @@
 import React from 'react';
 
-function Item({ item, onSell, onRestock, onDelete }) {
+function Item({ item, onSell, onDelete }) {
     return (
         <div>
             <h2>{item.name}</h2>
             <p>{item.description}</p>
-            <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Out of Stock'}</p>
+            <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Bag Empty'}</p>
             <button onClick={() => onSell(item.id)}>Sell</button>
-            <button onClick={() => onRestock(item.id, 130)}>Restock</button>
             <button onClick={() => onDelete(item.id)}>Delete</button>
         </div>
     );
