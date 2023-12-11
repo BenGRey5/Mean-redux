@@ -1,11 +1,21 @@
+// userOptions.js
 import React, { useState } from 'react';
 
 function OptionList({ onAddItem }) {
     const [selectedOption, setSelectedOption] = useState('');
+    const [showForm, setShowForm] = useState(false);
 
     const handleRadioChange = (event) => {
         const selectedCoffee = event.target.value;
         setSelectedOption(selectedCoffee);
+    };
+
+    const handleRestockButtonClick = () => {
+        setShowForm(true);
+    };
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
 
         // Assuming each coffee type has specific details
         const coffeeDetails = {
@@ -15,56 +25,78 @@ function OptionList({ onAddItem }) {
             'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
         };
 
-        // Add the corresponding item when a radio button is selected
-        onAddItem(coffeeDetails[selectedCoffee]);
+        // Add the corresponding item when the form is submitted
+        onAddItem(coffeeDetails[selectedOption]);
+
+        // Reset state and hide the form
+        setSelectedOption('');
+        setShowForm(false);
+    };
+
+    const handleFormCancel = () => {
+        // Reset state and hide the form when canceled
+        setSelectedOption('');
+        setShowForm(false);
     };
 
     return (
         <div>
             <h2>Select Coffee for Restock</h2>
-            <label>
-                <input
-                    type="radio"
-                    value="Arabica"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Arabica'}
-                    onChange={handleRadioChange}
-                />
-                Arabica
-            </label>
+            <button onClick={handleRestockButtonClick}>Restock</button>
 
-            <label>
-                <input
-                    type="radio"
-                    value="Robusta"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Robusta'}
-                    onChange={handleRadioChange}
-                />
-                Robusta
-            </label>
+            {showForm && (
+                <form onSubmit={handleFormSubmit}>
+                    <label>
+                        <input
+                            type="radio"
+                            value="Arabica"
+                            name="coffeeOptions"
+                            checked={selectedOption === 'Arabica'}
+                            onChange={handleRadioChange}
+                        />
+                        Arabica
+                    </label>
 
-            <label>
-                <input
-                    type="radio"
-                    value="Liberica"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Liberica'}
-                    onChange={handleRadioChange}
-                />
-                Liberica
-            </label>
+                    <label>
+                        <input
+                            type="radio"
+                            value="Robusta"
+                            name="coffeeOptions"
+                            checked={selectedOption === 'Robusta'}
+                            onChange={handleRadioChange}
+                        />
+                        Robusta
+                    </label>
 
-            <label>
-                <input
-                    type="radio"
-                    value="Excelsa"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Excelsa'}
-                    onChange={handleRadioChange}
-                />
-                Excelsa
-            </label>
+                    <label>
+                        <input
+                            type="radio"
+                            value="Liberica"
+                            name="coffeeOptions"
+                            checked={selectedOption === 'Liberica'}
+                            onChange={handleRadioChange}
+                        />
+                        Liberica
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            value="Excelsa"
+                            name="coffeeOptions"
+                            checked={selectedOption === 'Excelsa'}
+                            onChange={handleRadioChange}
+                        />
+                        Excelsa
+                    </label>
+
+                    <div>
+                        <button type="submit">Restock</button>
+                        <button type="button" onClick={handleFormCancel}>Cancel</button>
+                    </div>
+                </form>
+            )}
+
             <div>
                 Selected option: {selectedOption}
             </div>
@@ -73,6 +105,7 @@ function OptionList({ onAddItem }) {
 }
 
 export default OptionList;
+
 
 
 

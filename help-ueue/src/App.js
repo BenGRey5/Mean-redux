@@ -41,7 +41,6 @@ function App() {
       <ItemList
         items={items}
         onSell={sellItem}
-        onRestock={restockItem}
         onDelete={deleteItem}
         onUpdate={updateItem}
       />
