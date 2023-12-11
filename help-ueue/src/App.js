@@ -5,8 +5,8 @@ function App() {
   const [items, setItems] = useState([
     { id: 1, name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
     { id: 2, name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
-    { id: 3, name: 'Liberica Light Roast', description: 'Imported from', quantity: 130 },
-    { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from', quantity: 130 },
+    { id: 3, name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
+    { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
   ]);
   const [newItem, setNewItem] = useState({ name: '', description: '', quantity: 0 })
 

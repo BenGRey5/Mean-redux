@@ -15,6 +15,7 @@ function ItemList({ items, onSell, onRestock, onDelete, onUpdate }) {
                 />
             ))}
         </div>
+        
     );
 }
 
