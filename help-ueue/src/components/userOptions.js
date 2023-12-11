@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 function OptionList({ onAddItem }) {
     const [selectedOption, setSelectedOption] = useState('');
     const [showForm, setShowForm] = useState(false);
+    const [showInventory, setShowInventory] = useState(true);
 
     const handleRadioChange = (event) => {
         const selectedCoffee = event.target.value;
@@ -12,6 +13,7 @@ function OptionList({ onAddItem }) {
 
     const handleRestockButtonClick = () => {
         setShowForm(true);
+        setShowInventory(false);
     };
 
     const handleFormSubmit = (event) => {
@@ -28,21 +30,30 @@ function OptionList({ onAddItem }) {
         // Add the corresponding item when the form is submitted
         onAddItem(coffeeDetails[selectedOption]);
 
-        // Reset state and hide the form
+        // Reset state and show the inventory
         setSelectedOption('');
         setShowForm(false);
+        setShowInventory(true);
     };
 
     const handleFormCancel = () => {
-        // Reset state and hide the form when canceled
+        // Reset state and show the inventory when canceled
         setSelectedOption('');
         setShowForm(false);
+        setShowInventory(true);
     };
 
     return (
         <div>
-            <h2>Select Coffee for Restock</h2>
-            <button onClick={handleRestockButtonClick}>Restock</button>
+            {showInventory && (
+                <div>
+                    <h2>Select Coffee for Restock</h2>
+                    <button onClick={handleRestockButtonClick}>Restock</button>
+                    <div>
+                        Selected option: {selectedOption}
+                    </div>
+                </div>
+            )}
 
             {showForm && (
                 <form onSubmit={handleFormSubmit}>
@@ -91,46 +102,13 @@ function OptionList({ onAddItem }) {
                     </label>
 
                     <div>
-                        <button type="submit">Restock</button>
+                        <button type="submit">Submit</button>
                         <button type="button" onClick={handleFormCancel}>Cancel</button>
                     </div>
                 </form>
             )}
-
-            <div>
-                Selected option: {selectedOption}
-            </div>
         </div>
     );
 }
 
 export default OptionList;
-
-
-
-
-
-
-
-
-
-// function OptionList({stockArabica, stockRobusta, stockLiberica, stockExcelsa})
-
-
-
-
-
-// function Item({ item, onSell, onRestock, onDelete }) {
-//     return (
-//         <div>
-//             <h2>{item.name}</h2>
-//             <p>{item.description}</p>
-//             <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Out of Stock'}</p>
-//             <button onClick={() => onSell(item.id)}>Sell</button>
-//             <button onClick={() => onRestock(item.id, 130)}>Restock</button>
-//             <button onClick={() => onDelete(item.id)}>Delete</button>
-//         </div>
-//     );
-// }
-
-// export default Item;
