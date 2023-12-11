@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 function OptionList({ onAddItem }) {
