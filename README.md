@@ -6,13 +6,13 @@ B.G Reynolds
 
 ## Technologies Used:
 
-Javascript
-CSS
-HTML
-React
-npm (Node Package Manager)
-ESLint
-Git (version Control)
+-Javascript
+-CSS
+-HTML
+-React
+-npm (Node Package Manager)
+-ESLint
+-Git (version Control)
 
 ## Description:
 
