@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ItemList from './components/coffeeList.js';
+import OptionList from './components/userOptions.js';
 
 function App() {
   const [items, setItems] = useState([
@@ -8,6 +9,7 @@ function App() {
     { id: 3, name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
     { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
   ]);
+
   const [newItem, setNewItem] = useState({ name: '', description: '', quantity: 0 })
 
   const addItem = (newItem) => {
@@ -39,6 +41,7 @@ function App() {
   return (
     <div className="App">
       <h1>The Mean Bean</h1>
+      <OptionList onAddItem={addItem} />
       <ItemList
         items={items}
         onSell={sellItem}
@@ -51,6 +54,7 @@ function App() {
 }
 
 export default App;
+
 
 // import React, { useState } from 'react';
 // import ItemList from './components/coffeeList.js';
