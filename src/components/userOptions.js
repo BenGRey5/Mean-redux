@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ItemList from "./components/coffeeList.js";
 import OptionList from "./components/userOptions.js";
-
+import { connect } from "react-redux";
 function App() {
     const [items, setItems] = useState([
         { id: 1, name: "Arabica Light Roast", description: "Imported from Nicaragua $9.99 per pound", quantity: 130 },
@@ -14,9 +14,18 @@ function App() {
 
     const [form1visible, setForm1Visible] = useState(false);
 
-    const addItem = (newItem) => {
-        setItems((prevItems) => [...prevItems, { ...newItem, id: Date.now() }]);
-    };
+    // const addItem = (newItem) => {
+    //     setItems((prevItems) => [...prevItems, { ...newItem, id: Date.now() }]);
+    // };
+    handleAddItem = (addItem) => {
+        const { dispatch } = this.props;
+        const { id, brand, roast, issue } = addItem;
+        const action = {
+            type: "Add_Item",
+            id: id,
+
+        }
+    }
 
     const updateItem = (itemId, updatedItem) => {
         setItems((prevItems) => prevItems.map((item) => (item.id === itemId ? { ...item, ...updatedItem } : item)));
@@ -55,7 +64,7 @@ function App() {
         );
     }
 }
-
+App = connect()(App)
 export default App;
 
 
