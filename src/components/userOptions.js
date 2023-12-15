@@ -3,7 +3,8 @@ import ItemList from "./components/coffeeList.js";
 import OptionList from "./components/userOptions.js";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-function App() {
+
+function App(props) {
     const [items, setItems] = useState([
         { id: 1, name: "Arabica Light Roast", description: "Imported from Nicaragua $9.99 per pound", quantity: 130 },
         { id: 2, name: "Robusta Medium Roast", description: "Imported from Brazil $10.99 per pound", quantity: 130 },
@@ -12,65 +13,56 @@ function App() {
     ]);
 
     const [newItem, setNewItem] = useState({ name: "", description: "", quantity: 0 });
+    const [editing, setEditing] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const [form1visible, setForm1Visible] = useState(false);
 
-    // const addItem = (newItem) => {
-    //     setItems((prevItems) => [...prevItems, { ...newItem, id: Date.now() }]);
-    // };
-    handleAddItem = (addItem) => {
-        const { dispatch } = this.props;
-        const { id, name, description, quantity} = addItem;
+    const handleAddItem = (addItem) => {
+        const { dispatch } = props;
+        const { id, name, description, quantity } = addItem;
+
         const action = {
             type: "Add_Item",
             id: id,
             name: name,
             description: description,
             quantity: quantity
-        }
+        };
+
         dispatch(action);
-        this.setState({
-            editing: false,
-            selectedItem: null
-        })
+
+        setEditing(false);
+        setSelectedItem(null);
     }
 
-    // const updateItem = (itemId, updatedItem) => {
-    //     setItems((prevItems) => prevItems.map((item) => (item.id === itemId ? { ...item, ...updatedItem } : item)));
-    // };
-    handleUpdateItem = (id) => {
-        const selectedTicket = this.state.App[id];
-        this.setState({selectedTicket: selectedTicket});
+    const handleUpdateItem = (id) => {
+        const selectedTicket = items.find((item) => item.id === id);
+        setSelectedItem(selectedTicket);
     }
 
-    // const deleteItem = (itemId) => {
-    //     setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-    // };
-    handleDeleteItem = (id) => {
-        const { dispatch } = this.props;
+    const handleDeleteItem = (id) => {
+        const { dispatch } = props;
         const action = {
             type: "Delete_Item",
             id: id
         }
         dispatch(action);
-        this.setState({selectedItem: null})
+        setSelectedItem(null);
     }
 
     const sellItem = (itemId) => {
         setItems((prevItems) => prevItems.map((item) => (item.id === itemId ? { ...item, quantity: Math.max(item.quantity - 1, 0) } : item)));
     };
+
     const toggle = () => {
-        if (form1visible) {
-            setForm1Visible(false);
-        } else {
-            setForm1Visible(true);
-        }
+        setForm1Visible(!form1visible);
     };
+
     if (form1visible) {
         return (
             <>
-                <OptionList onAddItem={addItem} />
-
+                <OptionList onAddItem={handleAddItem} />
                 <button onClick={() => toggle()}>Return</button>
             </>
         );
@@ -79,22 +71,25 @@ function App() {
             <div className="App">
                 <h1>The Mean Bean</h1>
                 <button onClick={() => toggle()}>Order</button>
-                {/* <OptionList onAddItem={addItem} /> */}
-                <ItemList items={items} onSell={sellItem} onDelete={deleteItem} onUpdate={updateItem} />
+                <ItemList items={items} onSell={sellItem} onDelete={handleDeleteItem} onUpdate={handleUpdateItem} />
             </div>
         );
     }
 }
+
 App.propTypes = {
     App: PropTypes.object
 }
+
 const mapStateToProps = state => {
     return {
         mainItemList: state
     }
-}currentlyVisibleState = <ItemList itemList = {this.props.mainItemList} onItemSelection={this.handleItemUpdate} />;
-App = connect(mapStateToProps)(App)
+}
+
+App = connect(mapStateToProps)(App);
 export default App;
+
 
 
 // import React, { useState } from 'react';
