@@ -39,7 +39,7 @@ function App() {
     //     setItems((prevItems) => prevItems.map((item) => (item.id === itemId ? { ...item, ...updatedItem } : item)));
     // };
     handleUpdateItem = (id) => {
-        const selectedTicket = this.state.App.[id];
+        const selectedTicket = this.state.App[id];
         this.setState({selectedTicket: selectedTicket});
     }
 
@@ -92,7 +92,7 @@ const mapStateToProps = state => {
     return {
         mainItemList: state
     }
-}
+}currentlyVisibleState = <ItemList itemList = {this.props.mainItemList} onItemSelection={this.handleItemUpdate} />;
 App = connect(mapStateToProps)(App)
 export default App;
 

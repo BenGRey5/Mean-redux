@@ -3,6 +3,7 @@ import Item from './coffeeShop.js'
 
 function ItemList({ items, onSell, onDelete, onUpdate }) {
     return (
+        <React.Fragment>
         <div>
             {items.map(item => (
                 <Item
@@ -14,9 +15,13 @@ function ItemList({ items, onSell, onDelete, onUpdate }) {
                 />
             ))}
         </div>
+        </React.Fragment>
     );
 }
-
+ItemList.propTypes = {
+    itemList: PropTypes.object,
+    onItemSelection: PropTypes.func
+}
 export default ItemList;
 
 // import React from 'react';
