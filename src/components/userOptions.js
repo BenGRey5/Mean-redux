@@ -12,13 +12,13 @@ function App(props) {
         { id: 4, name: "Excelsa Dark Roast", description: "Imported from South America $11.99 per pound", quantity: 130 },
     ]);
 
-    const [addItemItem, setNewItem] = useState({ name: "", description: "", quantity: 0 });
+    const [addItem, AddItem] = useState({ name: "", description: "", quantity: 0 });
     const [editing, setEditing] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
     const [form1visible, setForm1Visible] = useState(false);
 
-    const handleAddItem = (addItem) => {
+    const AddItem = (addItem) => {
         const { dispatch } = props;
         const { id, name, description, quantity } = addItem;
 
@@ -90,7 +90,7 @@ const mapStateToProps = state => {
 App = connect(mapStateToProps)(App);
 export default App;
 
-ffff
+
 
 
 
