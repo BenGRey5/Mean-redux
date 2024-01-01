@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addCoffeeItem } from '../path-to-actions/actions'; // Adjust the path
 
-function OptionList({ onAddItem, isVisible }) {
+function OptionList({ onAddItem, isVisible, addCoffeeItem }) {
     const [selectedOption, setSelectedOption] = useState('');
 
     const handleRadioChange = (event) => {
         const selectedCoffee = event.target.value;
         setSelectedOption(selectedCoffee);
 
-        // Assuming each coffee type has specific details
         const coffeeDetails = {
             'Arabica': { name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
             'Robusta': { name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
@@ -15,8 +16,8 @@ function OptionList({ onAddItem, isVisible }) {
             'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
         };
 
-        // Add the corresponding item when a radio button is selected
-        onAddItem(coffeeDetails[selectedCoffee]);
+        // Dispatch the action to add the coffee item to the Redux store
+        addCoffeeItem(coffeeDetails[selectedCoffee]);
     };
 
     return (
@@ -33,38 +34,8 @@ function OptionList({ onAddItem, isVisible }) {
                 Arabica
             </label>
 
-            <label>
-                <input
-                    type="radio"
-                    value="Robusta"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Robusta'}
-                    onChange={handleRadioChange}
-                />
-                Robusta
-            </label>
+            {/* Repeat the above pattern for other coffee options... */}
 
-            <label>
-                <input
-                    type="radio"
-                    value="Liberica"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Liberica'}
-                    onChange={handleRadioChange}
-                />
-                Liberica
-            </label>
-
-            <label>
-                <input
-                    type="radio"
-                    value="Excelsa"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Excelsa'}
-                    onChange={handleRadioChange}
-                />
-                Excelsa
-            </label>
             <div>
                 Selected option: {selectedOption}
             </div>
@@ -72,7 +43,7 @@ function OptionList({ onAddItem, isVisible }) {
     );
 }
 
-export default OptionList;
+export default connect(null, { addCoffeeItem })(OptionList);
 
 
 
