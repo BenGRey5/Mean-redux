@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './path-to-reducers/store';
-import ItemList from './path-to-components/ItemList';
+import store from './reducers/store';
+import ItemList from './components/itemList';
 
 const App = () => {
   return (

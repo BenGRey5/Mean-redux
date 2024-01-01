@@ -1,17 +1,19 @@
-function OptionList({ isVisible }) {
+import React from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { addCoffeeItem } from '../reducers/actions';
+
+function OptionList({ isVisible, selectedOption }) {
     const dispatch = useDispatch();
-    const [selectedOption, setSelectedOption] = React.useState('');
+
+    const coffeeDetails = {
+        'Arabica': { name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
+        'Robusta': { name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
+        'Liberica': { name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
+        'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
+    };
 
     const handleRadioChange = (event) => {
         const selectedCoffee = event.target.value;
-        setSelectedOption(selectedCoffee);
-
-        const coffeeDetails = {
-            'Arabica': { name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
-            'Robusta': { name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
-            'Liberica': { name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
-            'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
-        };
 
         // Dispatch the action to add the coffee item to the Redux store
         dispatch(addCoffeeItem(coffeeDetails[selectedCoffee]));
@@ -39,7 +41,11 @@ function OptionList({ isVisible }) {
     );
 }
 
-export default connect(null)(OptionList);
+const mapStateToProps = (state) => ({
+    selectedOption: state.coffeeList.selectedOption,
+});
+
+export default connect(mapStateToProps)(OptionList);
 
 
 

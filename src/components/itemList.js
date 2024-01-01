@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Item from './Item';
-import OptionList from './OptionList';
+import Item from './item.js';
+import OptionList from './optionList.js';
 import {
     addItem,
     deleteItem,
@@ -11,7 +11,8 @@ import {
     selectItem,
     toggleForm,
     setDescription,
-} from '../path-to-actions/actions';
+} from '../reducers/actions.js';
+
 
 function ItemList({
     items,
@@ -31,37 +32,41 @@ function ItemList({
 }) {
     return (
         <div className="App">
-            {form1visible ? (
-                // Render your form 1 content here
-            ): form2visible ? (
-            // Render your form 2 content here
-            ) : form3visible ? (
-            // Render your form 3 content here
-            ) : (
-            <>
-                <OptionList />
-                <ItemList
-                    items={items}
-                    onSell={sellItem}
-                    onDelete={deleteItem}
-                    onUpdate={updateItem}
-                    onDescribe={toggleDescription}
-                    selectItem={selectItem}
-                />
-                {selectedItem && (
-                    <div>
-                        {form3visible && (
-                            <button onClick={() => toggleForm('form3')}>Return</button>
-                        )}
-                        <h2>{selectedItem.name}</h2>
-                        <form>
-                            {/* Your radio buttons and other form elements for default content */}
-                        </form>
-                        <p>{selectedDescription}</p>
-                    </div>
-                )}
-            </>
-      )}
+            {(() => {
+                if (form1visible) {
+                    // Render your form 1 content here
+                } else if (form2visible) {
+                    // Render your form 2 content here
+                } else if (form3visible) {
+                    // Render your form 3 content here
+                } else {
+                    return (
+                        <>
+                            <OptionList />
+                            <ItemList
+                                items={items}
+                                onSell={sellItem}
+                                onDelete={deleteItem}
+                                onUpdate={updateItem}
+                                onDescribe={toggleDescription}
+                                selectItem={selectItem}
+                            />
+                            {selectedItem && (
+                                <div>
+                                    {form3visible && (
+                                        <button onClick={() => toggleForm('form3')}>Return</button>
+                                    )}
+                                    <h2>{selectedItem.name}</h2>
+                                    <form>
+                                        {/* Your radio buttons and other form elements for default content */}
+                                    </form>
+                                    <p>{selectedDescription}</p>
+                                </div>
+                            )}
+                        </>
+                    );
+                }
+            })()}
         </div>
     );
 }
