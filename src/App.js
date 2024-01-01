@@ -1,24 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import store from './reducers/store.js'
-import ItemList from './components/itemList.js';
-import { initializeCoffeeList } from './reducers/actions.js';
+import store from './path-to-reducers/store';
+import ItemList from './path-to-components/ItemList';
 
 const App = () => {
-  useEffect(() => {
-    // Assuming you have some initial data for the coffee list
-    const initialCoffeeList = {
-      1: { name: 'Arabica Light Roast', description: 'Imported from Nicaragua $9.99 per pound', quantity: 130 },
-      2: { name: 'Robusta Medium Roast', description: 'Imported from Brazil $10.99 per pound', quantity: 130 },
-      3:  { name: 'Liberica Light Roast', description: 'Imported from Philippines $8.99 per pound', quantity: 130 },
-      4: { name: 'Excelsa Dark Roast', description: 'Imported from South America $11.99 per pound', quantity: 130 },
-      // Add more initial data as needed
-    };
-
-    // Dispatch the action to initialize the coffee list
-    store.dispatch(initializeCoffeeList(initialCoffeeList));
-  }, []);
-
   return (
     <Provider store={store}>
       <div className="App">

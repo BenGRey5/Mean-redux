@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { addCoffeeItem } from '../path-to-actions/actions'; // Adjust the path
-
-function OptionList({ onAddItem, isVisible, addCoffeeItem }) {
-    const [selectedOption, setSelectedOption] = useState('');
+function OptionList({ isVisible }) {
+    const dispatch = useDispatch();
+    const [selectedOption, setSelectedOption] = React.useState('');
 
     const handleRadioChange = (event) => {
         const selectedCoffee = event.target.value;
@@ -17,25 +14,24 @@ function OptionList({ onAddItem, isVisible, addCoffeeItem }) {
         };
 
         // Dispatch the action to add the coffee item to the Redux store
-        addCoffeeItem(coffeeDetails[selectedCoffee]);
+        dispatch(addCoffeeItem(coffeeDetails[selectedCoffee]));
     };
 
     return (
         <div style={{ display: isVisible ? 'block' : 'none' }}>
             <h2>Select Coffee</h2>
-            <label>
-                <input
-                    type="radio"
-                    value="Arabica"
-                    name="coffeeOptions"
-                    checked={selectedOption === 'Arabica'}
-                    onChange={handleRadioChange}
-                />
-                Arabica
-            </label>
-
-            {/* Repeat the above pattern for other coffee options... */}
-
+            {Object.keys(coffeeDetails).map((coffeeType) => (
+                <label key={coffeeType}>
+                    <input
+                        type="radio"
+                        value={coffeeType}
+                        name="coffeeOptions"
+                        checked={selectedOption === coffeeType}
+                        onChange={handleRadioChange}
+                    />
+                    {coffeeType}
+                </label>
+            ))}
             <div>
                 Selected option: {selectedOption}
             </div>
@@ -43,7 +39,7 @@ function OptionList({ onAddItem, isVisible, addCoffeeItem }) {
     );
 }
 
-export default connect(null, { addCoffeeItem })(OptionList);
+export default connect(null)(OptionList);
 
 
 
