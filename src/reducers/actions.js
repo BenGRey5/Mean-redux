@@ -12,7 +12,10 @@ export const deleteItem = (id) => ({
     type: 'DELETE_ITEM',
     payload: id,
 });
-
+export const toggleDescription = (id) => ({
+    type: 'TOGGLE_DESCRIPTION',
+    payload: id,
+});
 export const updateItem = (item) => ({
     type: 'UPDATE_ITEM',
     payload: item,

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initializeCoffeeList, deleteItem, updateItem, sellItem } from '../reducers/actions';
+import { initializeCoffeeList, deleteItem, updateItem, sellItem, toggleDescription } from '../reducers/actions';
 import Item from './item';
 
 function ItemList({
@@ -15,12 +15,13 @@ function ItemList({
     deleteItem,
     updateItem,
     sellItem,
+    toggleDescription,
 }) {
     useEffect(() => {
         // Assuming you have some initial data for the coffee list
         const initialCoffeeList = {
-            1: { names: 'Arabica', description: 'Imported from Nicaragua', quantity: 130 },
-            2: { names: 'Robusta', description: 'Imported from Brazil', quantity: 130 },
+            1: { name: 'Arabica Light Roast', description: 'Imported from Nicaragua $9.99 per pound', quantity: 130 },
+            2: { name: 'Robusta Medium Roast', description: 'Imported from Brazil $10.99 per pound', quantity: 130 },
             3: { name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
             4: { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
             // Add more initial data as needed
@@ -31,17 +32,17 @@ function ItemList({
     }, [initializeCoffeeList]);
 
     const handleSell = (id) => {
+        // Dispatch the action to toggle description
+        toggleDescription(id);
         // Dispatch the action to sell the item
         sellItem(id);
-        // Your existing logic for onSell (if needed)
-        // onSell(id);
     };
 
     const handleDelete = (id) => {
+        // Dispatch the action to toggle description
+        toggleDescription(id);
         // Dispatch the action to delete the item
         deleteItem(id);
-        // Your existing logic for onDelete (if needed)
-        // onDelete(id);
     };
 
     const handleUpdate = (item) => {
@@ -62,7 +63,7 @@ function ItemList({
                     onDelete={handleDelete}
                     onUpdate={handleUpdate}
                     onDescribe={onDescribe} // Make sure to pass onDescribe if needed
-                    selectItem={selectItem}
+                    selectItem={selectItem}  // Pass down selectItem here
                     addItem={addItem}
                 />
             ))}
@@ -79,4 +80,5 @@ export default connect(mapStateToProps, {
     deleteItem,
     updateItem,
     sellItem,
+    toggleDescription,
 })(ItemList);
