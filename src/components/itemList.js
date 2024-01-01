@@ -13,7 +13,6 @@ import {
     setDescription,
 } from '../reducers/actions.js';
 
-
 function ItemList({
     items,
     form1visible,
@@ -43,14 +42,18 @@ function ItemList({
                     return (
                         <>
                             <OptionList />
-                            <ItemList
-                                items={items}
-                                onSell={sellItem}
-                                onDelete={deleteItem}
-                                onUpdate={updateItem}
-                                onDescribe={toggleDescription}
-                                selectItem={selectItem}
-                            />
+                            {/* Use the Item component for each item in the list */}
+                            {items.map(item => (
+                                <Item
+                                    key={item.id}
+                                    item={item}
+                                    onSell={sellItem}
+                                    onDelete={deleteItem}
+                                    onUpdate={updateItem}
+                                    onDescribe={toggleDescription}
+                                    selectItem={selectItem}
+                                />
+                            ))}
                             {selectedItem && (
                                 <div>
                                     {form3visible && (
@@ -79,7 +82,6 @@ const mapStateToProps = (state) => ({
     selectedItem: state.coffeeList.selectedItem,
     selectedDescription: state.coffeeList.selectedDescription,
 });
-
 
 export default connect(mapStateToProps, {
     addItem,
