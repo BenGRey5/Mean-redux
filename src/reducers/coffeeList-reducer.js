@@ -43,8 +43,8 @@ const initialState = {
     form1visible: false,
     form2visible: false,
     form3visible: false,
+    newFormVisible: false, // New key for the new form
 };
-
 
 const coffeeListReducer = (state = initialState, action) => {
     const { type, payload } = action;
@@ -93,16 +93,30 @@ const coffeeListReducer = (state = initialState, action) => {
                 form1visible: false,
                 form2visible: false,
                 form3visible: true,
+                newFormVisible: false, // Ensure newFormVisible is false when selecting an item
             };
 
-
         case 'TOGGLE_FORM':
+            // Check if the payload is 'newForm' and toggle its visibility
+            if (payload === 'newForm') {
+                console.log('Toggling form: newForm');
+                return {
+                    ...state,
+                    newFormVisible: !state.newFormVisible,
+                    form1visible: false,
+                    form2visible: false,
+                    form3visible: false,
+                };
+            }
+            // Handle other forms as before
             return {
                 ...state,
                 form1visible: payload === 'form1' ? !state.form1visible : false,
                 form2visible: payload === 'form2' ? !state.form2visible : false,
                 form3visible: payload === 'form3' ? !state.form3visible : false,
             };
+
+
 
         case 'SET_DESCRIPTION':
             return {

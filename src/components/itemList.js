@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from './item.js';
@@ -19,6 +18,7 @@ function ItemList({
     form1visible,
     form2visible,
     form3visible,
+    newFormVisible,
     selectedItem,
     selectedDescription,
     selectedForm3Description,
@@ -34,7 +34,15 @@ function ItemList({
     return (
         <div className="App">
             {(() => {
-                if (form1visible) {
+                if (newFormVisible) {
+                    // Render your new form content here
+                    return (
+                        <div>
+                            {/* Content for the new form */}
+                            <p>This is the new form!</p>
+                        </div>
+                    );
+                } else if (form1visible) {
                     // Render your form 1 content here
                     return (
                         <div>
@@ -54,6 +62,11 @@ function ItemList({
                     );
                 } else if (form2visible) {
                     // Render your form 2 content here
+                    return (
+                        <div>
+                            <p>This is the content for form 2!</p>
+                        </div>
+                    );
                 } else if (form3visible) {
                     // Render your form 3 content here
                     return (
@@ -104,9 +117,10 @@ const mapStateToProps = (state) => ({
     form1visible: state.coffeeList.form1visible,
     form2visible: state.coffeeList.form2visible,
     form3visible: state.coffeeList.form3visible,
+    newFormVisible: state.coffeeList.newFormVisible, // Update to include newFormVisible
     selectedItem: state.coffeeList.selectedItem,
     selectedDescription: state.coffeeList.selectedDescription,
-    selectedForm3Description: state.coffeeList.selectedForm3Description,  // Add this line
+    selectedForm3Description: state.coffeeList.selectedForm3Description,
 });
 
 export default connect(mapStateToProps, {

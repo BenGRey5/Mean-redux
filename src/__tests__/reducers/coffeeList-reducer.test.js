@@ -1,19 +1,50 @@
-import coffeeListReducer from "../reducers/coffeeListReducer.js";
-import { initializeCoffeeList } from "../actions";
+import coffeeListReducer from './coffeeList-reducer';
+import * as actions from './';
 
 describe('coffeeListReducer', () => {
-    test('Should return default state if there is no action type passed into the reducer', () => {
-        expect(coffeeListReducer({}, { type: null })).toEqual({});
-    });
-
-    test('Should initialize the coffee list with the provided initial state', () => {
+    it('should handle ADD_ITEM action', () => {
         const initialState = {
-            1: { names: 'Arabica', description: 'Imported from Nicaragua', quantity: 10 },
-            2: { names: 'Robusta', description: 'Imported from Brazil', quantity: 20 },
+            items: [],
         };
 
-        expect(coffeeListReducer({}, initializeCoffeeList(initialState))).toEqual(initialState);
+        const itemToAdd = {
+            id: 1,
+            name: 'Test Item',
+        };
+
+        const action = actions.addItem(itemToAdd);
+        const newState = coffeeListReducer(initialState, action);
+
+        expect(newState.items).toHaveLength(1);
+        expect(newState.items[0]).toEqual(itemToAdd);
     });
 
-    // Add more tests for other action types and logic
-});
+    it('should handle DELETE_ITEM action', () => {
+        const initialState = {
+            items: [
+                { id: 1, name: 'Item1' },
+                { id: 2, name: 'Item2' },
+            ],
+        };
+
+        const itemIdToDelete = 1;
+
+        const action = actions.deleteItem(itemIdToDelete);
+        const newState = coffeeListReducer(initialState, action);
+
+        expect(newState.items).toHaveLength(1);
+        expect(newState.items[0].id).toEqual(2);
+    });
+
+    it('should handle TOGGLE_DESCRIPTION action', () => {
+        const initialState = {
+            form3visible: false,
+        };
+
+        const itemIdToToggle = 1;
+
+        const action = actions.toggleDescription(itemIdToToggle);
+        const newState = coffeeListReducer(initialState, action);
+
+        expect(newState.form3visible).toBe(true);
+    });
