@@ -1,3 +1,4 @@
+
 import { createStore, combineReducers, compose } from 'redux';
 import coffeeListReducer from './coffeeList-reducer';
 
@@ -21,7 +22,8 @@ export default store;
 
 
 
-// import { createStore, combineReducers } from 'redux';
+
+// import { createStore, combineReducers, compose } from 'redux';
 // import coffeeListReducer from './coffeeList-reducer';
 
 // const rootReducer = combineReducers({
@@ -29,6 +31,10 @@ export default store;
 //     // Add other reducers here if needed
 // });
 
-// const store = createStore(rootReducer);
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// const store = createStore(rootReducer, composeEnhancers());
 
 // export default store;
+
+

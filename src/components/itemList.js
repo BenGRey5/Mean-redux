@@ -20,7 +20,7 @@ function ItemList({
     form3visible,
     selectedItem,
     selectedDescription,
-    selectedForm3Description,  // Add this line
+    selectedForm3Description,
     addItem,
     deleteItem,
     updateItem,
@@ -35,6 +35,22 @@ function ItemList({
             {(() => {
                 if (form1visible) {
                     // Render your form 1 content here
+                    return (
+                        <div>
+                            <OptionList />
+                            {items.map(item => (
+                                <Item
+                                    key={item.id}
+                                    item={item}
+                                    onSell={sellItem}
+                                    onDelete={deleteItem}
+                                    onUpdate={updateItem}
+                                    onDescribe={toggleDescription}
+                                    selectItem={selectItem}
+                                />
+                            ))}
+                        </div>
+                    );
                 } else if (form2visible) {
                     // Render your form 2 content here
                 } else if (form3visible) {
@@ -63,7 +79,6 @@ function ItemList({
                     return (
                         <>
                             <OptionList />
-                            {/* Use the Item component for each item in the list */}
                             {items.map(item => (
                                 <Item
                                     key={item.id}
@@ -90,6 +105,7 @@ const mapStateToProps = (state) => ({
     form3visible: state.coffeeList.form3visible,
     selectedItem: state.coffeeList.selectedItem,
     selectedDescription: state.coffeeList.selectedDescription,
+    selectedForm3Description: state.coffeeList.selectedForm3Description,  // Add this line
 });
 
 export default connect(mapStateToProps, {
@@ -102,19 +118,6 @@ export default connect(mapStateToProps, {
     toggleForm,
     setDescription,
 })(ItemList);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -143,6 +146,7 @@ export default connect(mapStateToProps, {
 //     form3visible,
 //     selectedItem,
 //     selectedDescription,
+//     selectedForm3Description,  // Add this line
 //     addItem,
 //     deleteItem,
 //     updateItem,
@@ -161,7 +165,27 @@ export default connect(mapStateToProps, {
 //                     // Render your form 2 content here
 //                 } else if (form3visible) {
 //                     // Render your form 3 content here
+//                     return (
+//                         <div>
+//                             {selectedItem && (
+//                                 <div>
+//                                     {form3visible && (
+//                                         <button onClick={() => toggleForm('form3')}>Return</button>
+//                                     )}
+//                                     <h2>{selectedItem.name}</h2>
+//                                     <form>
+//                                         {/* Your radio buttons and other form elements for default content */}
+//                                     </form>
+//                                     <p>{selectedDescription}</p>
+//                                     {form3visible && (
+//                                         <p>{selectedForm3Description}</p>
+//                                     )}
+//                                 </div>
+//                             )}
+//                         </div>
+//                     );
 //                 } else {
+//                     // Render your default content
 //                     return (
 //                         <>
 //                             <OptionList />
@@ -177,18 +201,6 @@ export default connect(mapStateToProps, {
 //                                     selectItem={selectItem}
 //                                 />
 //                             ))}
-//                             {selectedItem && (
-//                                 <div>
-//                                     {form3visible && (
-//                                         <button onClick={() => toggleForm('form3')}>Return</button>
-//                                     )}
-//                                     <h2>{selectedItem.name}</h2>
-//                                     <form>
-//                                         {/* Your radio buttons and other form elements for default content */}
-//                                     </form>
-//                                     <p>{selectedDescription}</p>
-//                                 </div>
-//                             )}
 //                         </>
 //                     );
 //                 }
@@ -216,3 +228,11 @@ export default connect(mapStateToProps, {
 //     toggleForm,
 //     setDescription,
 // })(ItemList);
+
+
+
+
+
+
+
+

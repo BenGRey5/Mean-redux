@@ -61,8 +61,6 @@ export const addCoffeeItem = (coffeeDetails) => ({
 
 
 
-
-
 // export const initializeCoffeeList = (initialState) => ({
 //     type: 'INITIALIZE_COFFEE_LIST',
 //     initialState,
@@ -112,5 +110,3 @@ export const addCoffeeItem = (coffeeDetails) => ({
 //     type: 'ADD_COFFEE_ITEM',
 //     payload: coffeeDetails,
 // });
-
-

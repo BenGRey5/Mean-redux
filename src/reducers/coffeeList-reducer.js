@@ -1,40 +1,47 @@
+
+
 const initialState = {
     items: [
         {
             id: 1,
             name: 'Arabica Light Roast',
-            description: 'Imported from Nicaragua $9.99 per pound. Smooth and aromatic.',
-            form3Description: 'Special notes for form3 about Arabica Light Roast.',
+            description: 'Arabica is a light roast imported from Nicaragua costing $9.99 per pound. It is renowned for its exquisite flavour, which is frequently described as sweeter and softer than other coffee species',
+            form3Description: '',
             quantity: 130,
+            info: 'Imported from Nicaragua $9.99 per pound.',
             showDescription: false
         },
         {
             id: 2,
             name: 'Robusta Medium Roast',
-            description: 'Imported from Brazil $10.99 per pound',
-            form3Description: 'Special notes for form3 about  Robusta',
+            description: 'Robusta is a medium roast imported from Brazil costing $10.99 per pound. It is described as perfumey with notes of fruit and sugar tones.',
+            form3Description: '',
             quantity: 130,
+            info: 'Imported from Brazil $10.99 per pound',
             showDescription: false
         },
         {
             id: 3,
             name: 'Liberica Light Roast',
-            description: 'Imported from Philippines $8.99 per pound',
-            form3Description: 'Special notes for form 3 about Liberica',
+            description: 'Liberica is a light roast imported from the Philippines costing $8.99 per pound. Its almond-shaped beans have an exceptional aroma, almost floral and fruity, while its flavor is full and slightly smokey.',
+            form3Description: '',
             quantity: 130,
+            info: 'Imported from Philippines $8.99 per pound',
             showDescription: false
         },
         {
             id: 4,
             name: 'Excelsa Dark Roast',
-            description: 'Imported from South America $11.99 per pound',
-            form3Description: 'special notes for form3 Excelsa',
+            description: 'Excelsa is a dark roast imported from South America costing $11.99 per pound. Excelsa has a distinctive tart, fruity, dark, mysterious taste. In blends, it enhances the middle and back palate and lingering finish of the coffee, giving the cup more substance and power.',
+            form3Description: '',
             quantity: 130,
+            info: 'Imported from South America $11.99 per pound',
             showDescription: false
         },
     ],
     selectedItem: null,
     selectedDescription: '',
+    selectedForm3Description: '',
     form1visible: false,
     form2visible: false,
     form3visible: false,
@@ -82,9 +89,9 @@ const coffeeListReducer = (state = initialState, action) => {
             const selectedDescription = selectedItem ? selectedItem.description : '';
             return {
                 ...state,
-                selectedItem,
+                selectedItem: { ...selectedItem, info: selectedItem ? selectedItem.info : '' },
                 selectedDescription,
-                selectedForm3Description: selectedItem ? selectedItem.form3Description : '',  // Set form3Description
+                selectedForm3Description: selectedItem ? selectedItem.form3Description : '',
                 form1visible: false,
                 form2visible: false,
                 form3visible: true,
@@ -124,12 +131,42 @@ export default coffeeListReducer;
 
 
 
+
+
 // const initialState = {
 //     items: [
-//         { id: 1, name: 'Arabica Light Roast', description: 'Imported from Nicaragua $9.99 per pound', quantity: 130, showDescription: false },
-//         { id: 2, name: 'Robusta Medium Roast', description: 'Imported from Brazil $10.99 per pound', quantity: 130, showDescription: false },
-//         { id: 3, name: 'Liberica Light Roast', description: 'Imported from Philippines $8.99 per pound', quantity: 130, showDescription: false },
-//         { id: 4, name: 'Excelsa Dark Roast', description: 'Imported from South America $11.99 per pound', quantity: 130, showDescription: false },
+//         {
+//             id: 1,
+//             name: 'Arabica Light Roast',
+//             description: 'Imported from Nicaragua $9.99 per pound. Smooth and aromatic.',
+//             form3Description: 'Special notes for form3 about Arabica Light Roast.',
+//             quantity: 130,
+//             showDescription: false
+//         },
+//         {
+//             id: 2,
+//             name: 'Robusta Medium Roast',
+//             description: 'Imported from Brazil $10.99 per pound',
+//             form3Description: 'Special notes for form3 about  Robusta',
+//             quantity: 130,
+//             showDescription: false
+//         },
+//         {
+//             id: 3,
+//             name: 'Liberica Light Roast',
+//             description: 'Imported from Philippines $8.99 per pound',
+//             form3Description: 'Special notes for form 3 about Liberica',
+//             quantity: 130,
+//             showDescription: false
+//         },
+//         {
+//             id: 4,
+//             name: 'Excelsa Dark Roast',
+//             description: 'Imported from South America $11.99 per pound',
+//             form3Description: 'special notes for form3 Excelsa',
+//             quantity: 130,
+//             showDescription: false
+//         },
 //     ],
 //     selectedItem: null,
 //     selectedDescription: '',
@@ -176,13 +213,18 @@ export default coffeeListReducer;
 //             };
 
 //         case 'SELECT_ITEM':
+//             const selectedItem = payload;
+//             const selectedDescription = selectedItem ? selectedItem.description : '';
 //             return {
 //                 ...state,
-//                 selectedItem: payload,
+//                 selectedItem,
+//                 selectedDescription,
+//                 selectedForm3Description: selectedItem ? selectedItem.form3Description : '',  // Set form3Description
 //                 form1visible: false,
 //                 form2visible: false,
 //                 form3visible: true,
 //             };
+
 
 //         case 'TOGGLE_FORM':
 //             return {
@@ -204,3 +246,8 @@ export default coffeeListReducer;
 // };
 
 // export default coffeeListReducer;
+
+
+
+
+
