@@ -7,8 +7,16 @@ function Item({
     onUpdate,
     onDescribe,
     selectItem,
-    onOrder,  // Destructure onOrder from props
+    onOrder,
+    toggleForm,  // Destructure toggleForm from props
 }) {
+    const handleOrderButtonClick = () => {
+        if (onOrder) {
+            onOrder(item);
+            toggleForm('form2'); // Toggle to form2 after ordering
+        }
+    };
+
     return (
         <div>
             <h2 onClick={() => selectItem && selectItem(item)}>{item.name}</h2>
@@ -21,8 +29,8 @@ function Item({
             <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Bag empty'}</p>
             <button onClick={() => onSell(item.id)}>Sell</button>
             <button onClick={() => onDelete(item.id)}>Delete</button>
-            {/* Add Order button */}
-            <button onClick={() => onOrder && onOrder(item)}>Order</button>
+            {/* Modify Order button */}
+            <button onClick={handleOrderButtonClick}>Order</button>
         </div>
     );
 }

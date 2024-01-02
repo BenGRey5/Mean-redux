@@ -53,9 +53,11 @@ const coffeeListReducer = (state = initialState, action) => {
 
     switch (type) {
         case 'ADD_ITEM':
+            const { item, form } = payload;
             return {
                 ...state,
-                items: [...state.items, payload],
+                items: [...state.items, item],
+                [form]: false, // Hide the form after adding the item
             };
 
         case 'DELETE_ITEM':
@@ -112,8 +114,8 @@ const coffeeListReducer = (state = initialState, action) => {
                 selectedItem: payload,
                 selectedDescription: '',
                 form1visible: false,
-                form2visible: false,
-                form3visible: true,
+                form2visible: true,  // Set form2visible to true
+                form3visible: false, // Set form3visible to false
             };
 
         case 'SET_DESCRIPTION':
