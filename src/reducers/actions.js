@@ -14,6 +14,11 @@ export const deleteItem = (id) => ({
     payload: id,
 });
 
+export const orderItem = (item) => ({
+    type: 'ORDER_ITEM',
+    payload: item,
+});
+
 export const toggleDescription = (id) => ({
     type: 'TOGGLE_DESCRIPTION',
     payload: id,

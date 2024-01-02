@@ -1,10 +1,17 @@
 import React from 'react';
 
-function Item({ item, onSell, onDelete, onUpdate, onDescribe, selectItem }) {
+function Item({
+    item,
+    onSell,
+    onDelete,
+    onUpdate,
+    onDescribe,
+    selectItem,
+    onOrder,  // Destructure onOrder from props
+}) {
     return (
         <div>
             <h2 onClick={() => selectItem && selectItem(item)}>{item.name}</h2>
-            {/* Always display the "info" property */}
             <p>Info: {item.info}</p>
             {item.showDescription && (
                 <>
@@ -14,11 +21,14 @@ function Item({ item, onSell, onDelete, onUpdate, onDescribe, selectItem }) {
             <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Bag empty'}</p>
             <button onClick={() => onSell(item.id)}>Sell</button>
             <button onClick={() => onDelete(item.id)}>Delete</button>
+            {/* Add Order button */}
+            <button onClick={() => onOrder && onOrder(item)}>Order</button>
         </div>
     );
 }
 
 export default Item;
+
 
 
 
@@ -29,7 +39,13 @@ export default Item;
 //     return (
 //         <div>
 //             <h2 onClick={() => selectItem && selectItem(item)}>{item.name}</h2>
-//             {item.showDescription && <p>{item.description}</p>}
+//             {/* Always display the "info" property */}
+//             <p>Info: {item.info}</p>
+//             {item.showDescription && (
+//                 <>
+//                     <p>{item.description}</p>
+//                 </>
+//             )}
 //             <p>{item.quantity > 0 ? `Quantity: ${item.quantity}` : 'Bag empty'}</p>
 //             <button onClick={() => onSell(item.id)}>Sell</button>
 //             <button onClick={() => onDelete(item.id)}>Delete</button>

@@ -11,6 +11,7 @@ import {
     selectItem,
     toggleForm,
     setDescription,
+    orderItem,
 } from '../reducers/actions.js';
 
 function ItemList({
@@ -29,6 +30,8 @@ function ItemList({
     selectItem,
     toggleForm,
     setDescription,
+    // Add onOrder handler
+    onOrder,
 }) {
     return (
         <div className="App">
@@ -36,8 +39,7 @@ function ItemList({
                 if (form1visible) {
                     // Render your form 1 content here
                     return (
-                        <div>
-                            <OptionList />
+                        <div className="App">
                             {items.map(item => (
                                 <Item
                                     key={item.id}
@@ -47,6 +49,7 @@ function ItemList({
                                     onUpdate={updateItem}
                                     onDescribe={toggleDescription}
                                     selectItem={selectItem}
+                                    onOrder={onOrder}  // Pass onOrder prop to Item component
                                 />
                             ))}
                         </div>
@@ -107,17 +110,19 @@ const mapStateToProps = (state) => ({
     selectedDescription: state.coffeeList.selectedDescription,
     selectedForm3Description: state.coffeeList.selectedForm3Description,  // Add this line
 });
+const mapDispatchToProps = (dispatch) => ({
+    addItem: (item) => dispatch(addItem(item)),
+    deleteItem: (id) => dispatch(deleteItem(id)),
+    updateItem: (item) => dispatch(updateItem(item)),
+    sellItem: (id) => dispatch(sellItem(id)),
+    toggleDescription: (id) => dispatch(toggleDescription(id)),
+    selectItem: (item) => dispatch(selectItem(item)),
+    toggleForm: (form) => dispatch(toggleForm(form)),
+    setDescription: (description) => dispatch(setDescription(description)),
+    orderItem: (item) => dispatch(orderItem(item)), // Define orderItem in mapDispatchToProps
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
 
-export default connect(mapStateToProps, {
-    addItem,
-    deleteItem,
-    updateItem,
-    sellItem,
-    toggleDescription,
-    selectItem,
-    toggleForm,
-    setDescription,
-})(ItemList);
 
 
 
@@ -146,7 +151,7 @@ export default connect(mapStateToProps, {
 //     form3visible,
 //     selectedItem,
 //     selectedDescription,
-//     selectedForm3Description,  // Add this line
+//     selectedForm3Description,
 //     addItem,
 //     deleteItem,
 //     updateItem,
@@ -161,6 +166,22 @@ export default connect(mapStateToProps, {
 //             {(() => {
 //                 if (form1visible) {
 //                     // Render your form 1 content here
+//                     return (
+//                         <div>
+//                             <OptionList />
+//                             {items.map(item => (
+//                                 <Item
+//                                     key={item.id}
+//                                     item={item}
+//                                     onSell={sellItem}
+//                                     onDelete={deleteItem}
+//                                     onUpdate={updateItem}
+//                                     onDescribe={toggleDescription}
+//                                     selectItem={selectItem}
+//                                 />
+//                             ))}
+//                         </div>
+//                     );
 //                 } else if (form2visible) {
 //                     // Render your form 2 content here
 //                 } else if (form3visible) {
@@ -189,7 +210,6 @@ export default connect(mapStateToProps, {
 //                     return (
 //                         <>
 //                             <OptionList />
-//                             {/* Use the Item component for each item in the list */}
 //                             {items.map(item => (
 //                                 <Item
 //                                     key={item.id}
@@ -216,6 +236,7 @@ export default connect(mapStateToProps, {
 //     form3visible: state.coffeeList.form3visible,
 //     selectedItem: state.coffeeList.selectedItem,
 //     selectedDescription: state.coffeeList.selectedDescription,
+//     selectedForm3Description: state.coffeeList.selectedForm3Description,  // Add this line
 // });
 
 // export default connect(mapStateToProps, {

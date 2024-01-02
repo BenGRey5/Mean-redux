@@ -91,10 +91,10 @@ export default connect(mapStateToProps)(OptionList);
 //     const dispatch = useDispatch();
 
 //     const coffeeDetails = {
-//         'Arabica': { name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130 },
-//         'Robusta': { name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130 },
-//         'Liberica': { name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130 },
-//         'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130 },
+//         'Arabica': { name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130, info: "dogma", },
+//         'Robusta': { name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130, info: "dogma", },
+//         'Liberica': { name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130, info: "dogma", },
+//         'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130, info: "dogma", },
 //     };
 
 //     const handleRadioChange = (event) => {
@@ -152,4 +152,6 @@ export default connect(mapStateToProps)(OptionList);
 // });
 
 // export default connect(mapStateToProps)(OptionList);
+
+
 
