@@ -1,6 +1,6 @@
-# Coffee project
+# Coffee project-redux
 ## Overview:
-This project is a coffee bean inventory tracker that let's you view current brands, amounts and allows you to restock them.
+This project is an attempt to refactor a coffee bean inventory tracker that let's you view current brands, amounts and allows you to restock them using redux.
 ## Code contributors/Authors
 B.G Reynolds
 
@@ -13,6 +13,7 @@ B.G Reynolds
 -npm (Node Package Manager)
 -ESLint
 -Git (version Control)
+-Redux
 
 ## Description:
 
@@ -28,7 +29,7 @@ This project uses react to keep track of inventroy, provide descriptions, inform
 - Finally run the command `npm run start`
 
 ## Known Bugs:
-- unknown
+- You are unable to order coffee
 
 ## License
 - Copyright (c) 2023 Ben Reynolds
