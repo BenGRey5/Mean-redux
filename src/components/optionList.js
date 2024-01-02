@@ -1,11 +1,9 @@
-
-
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { addCoffeeItem, toggleForm } from '../reducers/actions';
 
-function OptionList({ isVisible, selectedOption, form1visible, addItem }) {
-    console.log('for1visible:', form1visible);
+function OptionList({ isVisible, selectedOption, form1visible, addItem, toggleForm }) {
+    console.log('form1visible:', form1visible);
     const dispatch = useDispatch();
 
     const coffeeDetails = {
@@ -30,36 +28,46 @@ function OptionList({ isVisible, selectedOption, form1visible, addItem }) {
         dispatch(addItem(coffeeDetails[coffeeType]));
     };
 
+    const handleOrderCoffeeButtonClick = () => {
+        // Dispatch an action or perform logic when "Order Coffee" is clicked
+        console.log("Order Coffee clicked!");
+    };
+
     return (
-        <div style={{ display: isVisible ? 'block' : 'none' }}>
-            <h2>Select Coffee</h2>
-            {Object.keys(coffeeDetails).map((coffeeType) => (
-                <label key={coffeeType}>
-                    <input
-                        type="radio"
-                        value={coffeeType}
-                        name="coffeeOptions"
-                        checked={selectedOption === coffeeType}
-                        onChange={handleRadioChange}
-                    />
-                    {coffeeType}
-                </label>
-            ))}
-            <div>
-                Selected option: {selectedOption}
-            </div>
-            {/* Button to toggle form1 visibility */}
-            <button onClick={handleForm1ButtonClick}>Show Form 1</button>
-            {/* Form 1 with buttons to add items */}
-            {form1visible && (
+        <div>
+            {/* Order Coffee button always visible */}
+            <button onClick={handleOrderCoffeeButtonClick}>Order Coffee</button>
+
+            <div style={{ display: isVisible ? 'block' : 'none' }}>
+                <h2>Select Coffee</h2>
+                {Object.keys(coffeeDetails).map((coffeeType) => (
+                    <label key={coffeeType}>
+                        <input
+                            type="radio"
+                            value={coffeeType}
+                            name="coffeeOptions"
+                            checked={selectedOption === coffeeType}
+                            onChange={handleRadioChange}
+                        />
+                        {coffeeType}
+                    </label>
+                ))}
                 <div>
-                    <h2>Form 1</h2>
-                    <button onClick={() => handleAddItemButtonClick('Arabica')}>Add Arabica</button>
-                    <button onClick={() => handleAddItemButtonClick('Robusta')}>Add Robusta</button>
-                    <button onClick={() => handleAddItemButtonClick('Liberica')}>Add Liberica</button>
-                    <button onClick={() => handleAddItemButtonClick('Excelsa')}>Add Excelsa</button>
+                    Selected option: {selectedOption}
                 </div>
-            )}
+                {/* Button to toggle form1 visibility */}
+                <button onClick={handleForm1ButtonClick}>Show Form 1</button>
+                {/* Form 1 with buttons to add items */}
+                {form1visible && (
+                    <div>
+                        <h2>Form 1</h2>
+                        <button onClick={() => handleAddItemButtonClick('Arabica')}>Add Arabica</button>
+                        <button onClick={() => handleAddItemButtonClick('Robusta')}>Add Robusta</button>
+                        <button onClick={() => handleAddItemButtonClick('Liberica')}>Add Liberica</button>
+                        <button onClick={() => handleAddItemButtonClick('Excelsa')}>Add Excelsa</button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
@@ -69,11 +77,7 @@ const mapStateToProps = (state) => ({
     form1visible: state.coffeeList.form1visible,
 });
 
-export default connect(mapStateToProps)(OptionList);
-
-
-
-
+export default connect(mapStateToProps, { toggleForm })(OptionList);
 
 
 

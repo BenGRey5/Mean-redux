@@ -1,4 +1,6 @@
 
+
+
 export const initializeCoffeeList = (initialState) => ({
     type: 'INITIALIZE_COFFEE_LIST',
     initialState,
@@ -12,11 +14,6 @@ export const addItem = (item) => ({
 export const deleteItem = (id) => ({
     type: 'DELETE_ITEM',
     payload: id,
-});
-
-export const orderItem = (item) => ({
-    type: 'ORDER_ITEM',
-    payload: item,
 });
 
 export const toggleDescription = (id) => ({
@@ -53,7 +50,6 @@ export const addCoffeeItem = (coffeeDetails) => ({
     type: 'ADD_COFFEE_ITEM',
     payload: coffeeDetails,
 });
-
 
 
 

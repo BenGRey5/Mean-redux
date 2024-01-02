@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from './item.js';
@@ -11,16 +12,7 @@ import {
     selectItem,
     toggleForm,
     setDescription,
-    orderItem,
 } from '../reducers/actions.js';
-
-// Define coffeeDetails here
-const coffeeDetails = {
-    'Arabica': { name: 'Arabica Light Roast', description: 'Imported from Nicaragua', quantity: 130, info: "dogma", },
-    'Robusta': { name: 'Robusta Medium Roast', description: 'Imported from Brazil', quantity: 130, info: "dogma", },
-    'Liberica': { name: 'Liberica Light Roast', description: 'Imported from Philippines', quantity: 130, info: "dogma", },
-    'Excelsa': { name: 'Excelsa Dark Roast', description: 'Imported from South America', quantity: 130, info: "dogma", },
-};
 
 function ItemList({
     items,
@@ -38,15 +30,15 @@ function ItemList({
     selectItem,
     toggleForm,
     setDescription,
-    onOrder,
-    dispatch, // Add dispatch prop
 }) {
     return (
         <div className="App">
             {(() => {
                 if (form1visible) {
+                    // Render your form 1 content here
                     return (
-                        <div className="App">
+                        <div>
+                            <OptionList />
                             {items.map(item => (
                                 <Item
                                     key={item.id}
@@ -56,38 +48,12 @@ function ItemList({
                                     onUpdate={updateItem}
                                     onDescribe={toggleDescription}
                                     selectItem={selectItem}
-                                    onOrder={onOrder}
-                                    toggleForm={toggleForm}
                                 />
                             ))}
                         </div>
                     );
                 } else if (form2visible) {
                     // Render your form 2 content here
-                    return (
-                        <div>
-                            <form>
-                                <h2>Form 2</h2>
-                                {/* Add radio buttons for Arabica, Robusta, Liberica, Excelsa */}
-                                {Object.keys(coffeeDetails).map(coffeeType => (
-                                    <label key={coffeeType}>
-                                        <input
-                                            type="radio"
-                                            value={coffeeType}
-                                            name="coffeeOptionsForm2"
-                                            // You may need to adjust this based on your state or UI requirements
-                                            checked={selectedItem && selectedForm3Description === coffeeType}
-                                            onChange={(event) => {
-                                                // Dispatch action to add corresponding item to form1
-                                                dispatch(addItem(coffeeDetails[event.target.value], 'form1'));
-                                            }}
-                                        />
-                                        {coffeeType}
-                                    </label>
-                                ))}
-                            </form>
-                        </div>
-                    );
                 } else if (form3visible) {
                     // Render your form 3 content here
                     return (
@@ -110,6 +76,7 @@ function ItemList({
                         </div>
                     );
                 } else {
+                    // Render your default content
                     return (
                         <>
                             <OptionList />
@@ -122,8 +89,6 @@ function ItemList({
                                     onUpdate={updateItem}
                                     onDescribe={toggleDescription}
                                     selectItem={selectItem}
-                                    onOrder={onOrder}
-                                    toggleForm={toggleForm}
                                 />
                             ))}
                         </>
@@ -141,23 +106,21 @@ const mapStateToProps = (state) => ({
     form3visible: state.coffeeList.form3visible,
     selectedItem: state.coffeeList.selectedItem,
     selectedDescription: state.coffeeList.selectedDescription,
-    selectedForm3Description: state.coffeeList.selectedForm3Description,
+    selectedForm3Description: state.coffeeList.selectedForm3Description,  // Add this line
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    addItem: (item, form) => dispatch(addItem(item, form)),
-    deleteItem: (id) => dispatch(deleteItem(id)),
-    updateItem: (item) => dispatch(updateItem(item)),
-    sellItem: (id) => dispatch(sellItem(id)),
-    toggleDescription: (id) => dispatch(toggleDescription(id)),
-    selectItem: (item) => dispatch(selectItem(item)),
-    toggleForm: (form) => dispatch(toggleForm(form)),
-    setDescription: (description) => dispatch(setDescription(description)),
-    orderItem: (item) => dispatch(orderItem(item)),
-    dispatch, // Add dispatch prop
-});
+export default connect(mapStateToProps, {
+    addItem,
+    deleteItem,
+    updateItem,
+    sellItem,
+    toggleDescription,
+    selectItem,
+    toggleForm,
+    setDescription,
+})(ItemList);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
+
 
 
 
